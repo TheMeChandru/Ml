@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>LINEAR REGRESSION
+        import pandas as pd
+        import matplotlib.pyplot as plt
+        from sklearn.linear_model import LinearRegression
+        data = pd.read_csv('C:\\Position_Salaries.csv')
+        x, y = data.iloc[:, 1:2].values, data.iloc[:, 2].values
+        model = LinearRegression().fit(x, y)
+        plt.scatter(x, y, color="blue")
+        plt.plot(x, model.predict(x), color="red")
+        plt.title("Bluff Detection Model (Linear Regression)")
+        plt.xlabel("Position Levels")
+        plt.ylabel("Salary")
+        plt.show()</p><br>
+        <pre>
+            Logistic Regression
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
+data = pd.read_csv('C:\\Position_Salaries.csv')
+x, y = data.iloc[:, 1:2].values, data.iloc[:, 2].values
+threshold = 100000
+y = (y > threshold)
+model = LogisticRegression().fit(x, y)
+plt.scatter(x, y, color="blue", label="Actual")
+plt.plot(x, model.predict(x), color="red", label="Predicted")
+plt.title("Bluff Detection Model (Logistic Regression)")
+plt.xlabel("Position Levels")
+plt.ylabel("Salary Classification")
+plt.show()
+        </p><br>
+        <pre>import pandas as pd
+            import matplotlib.pyplot as plt
+            from sklearn.linear_model import LinearRegression
+            from sklearn.preprocessing import PolynomialFeatures
+            data = pd.read_csv('C:\\Position_Salaries.csv')
+            x, y = data.iloc[:, 1:2].values, data.iloc[:, 2].values
+            poly_features = PolynomialFeatures(degree=4)
+            x_poly = poly_features.fit_transform(x)
+            model = LinearRegression()
+            model.fit(x_poly, y)
+            plt.scatter(x, y, color="blue", label="Actual")
+            plt.plot(x, model.predict(x_poly), color="red", label="Polynomial Fit")
+            plt.title("Bluff Detection Model (Polynomial Regression)")plt.xlabel("Position Levels")
+            plt.ylabel("Salary")
+            plt.legend()
+            plt.show()</p><br>
+            <pre>Decision Tree
+                import pandas as pd
+                import matplotlib.pyplot as plt
+                from sklearn.tree import DecisionTreeClassifier, plot_tree
+                from sklearn.datasets import load_iris
+                from sklearn.model_selection import train_test_split
+                from sklearn.metrics import accuracy_score
+                data = load_iris()
+                x = data.data
+                y = data.target
+                x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
+                model = DecisionTreeClassifier().fit(x_train, y_train)
+                y_pred = model.predict(x_test)
+                accuracy = accuracy_score(y_test, y_pred)
+                print("Accuracy:", accuracy)
+                plot_tree(model, feature_names=data.feature_names, class_names=data.target_names, filled=True)
+                plt.title("Decision Tree on Iris Dataset")
+                plt.show()</p> <br>
+                <pre>KNN
+                    import pandas as pd
+                    from sklearn.datasets import load_iris
+                    from sklearn.model_selection import train_test_split
+                    from sklearn.neighbors import KNeighborsClassifier
+                    from sklearn.metrics import accuracy_score, confusion_matrix
+                    data = load_iris()
+                    x = data.data
+                    y = data.target
+                    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+                    knn = KNeighborsClassifier(n_neighbors=5)
+                    knn.fit(x_train, y_train)
+                    print(x[:5])
+                    print("\n",y[:5])
+                    y_pred_train = knn.predict(x_train)
+                    y_pred_test = knn.predict(x_test)
+                    print("Training Accuracy:", accuracy_score(y_train, y_pred_train))
+print("Testing Accuracy:", accuracy_score(y_test, y_pred_test))
+print("\nTraining Confusion Matrix:\n", confusion_matrix(y_train, y_pred_train))
+print("\nTesting Confusion Matrix:\n", confusion_matrix(y_test, y_pred_test))</p> <br>
+<pre>Multi Logistic
+    import pandas as pd
+    from sklearn.datasets import load_iris
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.model_selection import train_test_split
+    from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+    data = load_iris()
+    x = data.data
+    y = data.target
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+    model = LogisticRegression(multi_class='multinomial', solver='lbfgs', max_iter=200)
+    model.fit(x_train, y_train)y_pred = model.predict(x_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    conf_matrix = confusion_matrix(y_test, y_pred)
+    class_report = classification_report(y_test, y_pred, target_names=data.target_names)
+    print("Accuracy:", accuracy)
+    print("\nConfusion Matrix:\n", conf_matrix)
+    print("\nClassification Report:\n", class_report)</p>
+
+    <br> <pre>K means clustering
+        import pandas as pd
+        import matplotlib.pyplot as plt
+        from sklearn.datasets import load_iris
+        from sklearn.cluster import KMeans
+        from sklearn.decomposition import PCA
+        data = load_iris()
+        x = data.data
+        y = data.target
+        kmeans = KMeans(n_clusters=3, random_state=42)
+        y_kmeans = kmeans.fit_predict(x)
+        pca = PCA(n_components=2)
+        x_pca = pca.fit_transform(x)plt.figure(figsize=(8, 6))
+        plt.scatter(x_pca[:, 0], x_pca[:, 1], c=y_kmeans, cmap='viridis')
+        plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=200, c='red',
+        label='Centroids')
+        plt.title("K-Means Clustering of Iris Dataset")
+        plt.xlabel("PCA Component 1")
+        plt.ylabel("PCA Component 2")
+        plt.legend()
+        plt.show()</pre>
+</body>
+</html>
